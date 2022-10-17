@@ -44,9 +44,25 @@ function criaElemento(item) {
     qtdItem.dataset.id = item.id; // atribuiu o data-id dentro do elemento
     novoItem.appendChild(qtdItem); //inputando o elemento 'qtdItem' para dntro do elemento 'novoItem'
     novoItem.innerHTML += item.nome; // adicionando dentro do elemento 'novoItem' o 'nome' objeto enviado como parâmetro
-    lista.appendChild(novoItem); //inputando o elemento 'novoItem' para dntro da lista
+    novoItem.appendChild(botaoDeleta()); //inputa o elemento botão dentro do elemento 'novoItem' 
+    lista.appendChild(novoItem); //inputando o elemento 'novoItem' para dentro da lista
 }
 
 function atualizaQtd(item){
     document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade; // busca pelo data- e atualiza o valor da quantidade do objeto
+}
+
+function botaoDeleta(){
+    const elementoBotao = document.createElement('button'); //criando o elemento tag <button>
+    elementoBotao.innerHTML = "X"; //escrevendo 'x' no botão
+
+    elementoBotao.addEventListener("click", function() {
+        deletaElemento(this.parentNode); //chama a função para deletar o elemento pai do botão
+    })
+
+    return elementoBotao; //retorna valor para a função appendChild ter algo para inputar
+}
+
+function deletaElemento(element){
+    element.remove();
 }
